@@ -146,10 +146,12 @@ AUTH_USER_MODEL = "accounts.CustomUser"   #new
 #LOGIN_REDIRECT_URL = "home"   #new
 #LOGOUT_REDIRECT_URL = "home"  #new
 
+
 #django-crispy-forms
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"   #new
 CRISPY_TEMPLATE_PACK = "bootstrap5"   #new
+
 
 #django-allauth config
 
@@ -167,3 +169,17 @@ ACCOUNT_USERNAME_REQUIRED = False   #new
 ACCOUNT_AUTHENTICATION_METHOD = "email"   #new
 ACCOUNT_EMAIL_REQUIRED = True   #new
 ACCOUNT_UNIQUE_EMAIL = True   #new
+
+
+DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"   #new
+
+
+## email service configration ##
+
+#EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#EMAIL_HOST = env.str("EMAIL_HOST")
+#EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+#EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+#EMAIL_PORT = env.str("EMAIL_PORT")
+#EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
+#DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
