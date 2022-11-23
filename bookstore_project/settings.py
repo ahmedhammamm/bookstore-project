@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import socket
 from pathlib import Path
 from environs import Env
 
@@ -52,13 +53,15 @@ INSTALLED_APPS = [
     "allauth.socialaccount",  #newyy
     "allauth.socialaccount.providers.github",  #newyy
     "allauth.socialaccount.providers.google",   #newyy
+    "debug_toolbar",   #new
     #local
-    'accounts.apps.AccountsConfig',  #new
-    'pages.apps.PagesConfig',  #new
-    'books.apps.BooksConfig',  #new
+    "accounts.apps.AccountsConfig",  #new
+    "pages.apps.PagesConfig",  #new
+    "books.apps.BooksConfig",  #new
 ]
 
 MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",   #new
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,7 +69,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",    #new
+    "django.middleware.cache.FetchFromCacheMiddleware",   #new
 ]
+
+CACHE_MIDDLEWARE_ALIAS = "default"    #new
+CACHE_MIDDLEWARE_SECONDS = 604800     #new
+CACHE_MIDDLEWARE_KEY_PREFIX = ""      #new
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
@@ -177,6 +186,8 @@ ACCOUNT_UNIQUE_EMAIL = True   #new
 
 DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"   #new
 
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())    #new
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]       #new
 
 ## email service configration ##
 
