@@ -38,13 +38,14 @@ ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',  #newyy
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "whitenoise.runserver_nostatic",   #new
+    "django.contrib.staticfiles",
+    "django.contrib.sites",  #newyy
     #3rd party
     "crispy_forms",  #new
     "crispy_bootstrap5",   #new
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.cache.UpdateCacheMiddleware",   #new
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",   #new
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,7 +146,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]  #new
 STATIC_ROOT = BASE_DIR / "staticfiles"  #new
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"  #new
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"  #new
 
 MEDIA_URL = "/media/"     #new
 MEDIA_ROOT = BASE_DIR / "media"     #new
